@@ -1,9 +1,8 @@
-# vue-project
+# Demo Islands
+Demo Islands is a hub for numerous small, self-contained frontend demos. Effectively, this is a private CodePen/JsFiddle archive, which I will embed on my portfolio.
 
-This template should help get you started developing with Vue 3 in Vite.
-
+# Development Info
 ## Recommended IDE Setup
-
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
 ## Type Support for `.vue` Imports in TS
