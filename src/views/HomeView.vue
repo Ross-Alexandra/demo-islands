@@ -18,6 +18,7 @@ import { publicIslands } from '@/publicIslands';
 .islands {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    place-items: center;
 
     margin-top: 15px;
     gap: 15px;

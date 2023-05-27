@@ -1,3 +1,0 @@
-window.sayHello = () => {
-    alert("Hello!");
-}

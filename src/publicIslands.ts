@@ -4,6 +4,9 @@ interface Island {
 }
 
 export const publicIslands: Island[] = [{
-    name: 'demo',
-    description: 'A demo placeholder island',
+    name: 'eye-trainer',
+    description: 'A tool which can be used to practice following a moving object with your eyes. This tool was created to learn how to animate along a path in SVG.',
+}, {
+    name: 'example',
+    description: 'An example island which can be used as a template for creating new islands.'
 }];

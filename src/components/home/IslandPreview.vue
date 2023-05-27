@@ -2,14 +2,18 @@
     <a 
         class="island-preview"
         :href="islandLink"
+        target="_blank"
+        rel="noopener noreferrer"
     >
         <iframe
             :src="islandLink"
             :title="props.name"
         />
 
-        <h3>{{ props.name }}</h3>
-        <p>{{ props.description }}</p>
+        <div>
+            <h3>{{ props.name }}</h3>
+            <p>{{ props.description }}</p>
+        </div>
     </a>
 </template>
 
@@ -28,8 +32,9 @@ const islandLink = computed(() => `/static-islands/${props.name}/index.html`);
 .island-preview {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 
-    width: max-content;
+    width: min-content;
 
     padding: 15px;
     background-color: var(--layer-color);
