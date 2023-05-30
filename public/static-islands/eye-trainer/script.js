@@ -1,4 +1,51 @@
-import { createCirclePath, createLinePath } from './routines/index.js';
+/**
+ * Set up the routine objects and the functions which
+ * will be used to create the paths.
+ */
+
+/** 
+ * Creates a circle path in the provided SVG element.
+ * @type {(svgElement: SVGSVGElement) => SVGElement}
+ */
+function createCirclePath(svgElement) {
+    const width = svgElement.viewBox.baseVal.width;
+    const height = svgElement.viewBox.baseVal.height;
+
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", "50%");
+    circle.setAttribute("cy", "50%");
+    circle.setAttribute("r", 0.4 * Math.min(width, height));
+    circle.setAttribute("fill", "none");
+
+    svgElement.appendChild(circle);
+
+    return circle;
+}
+
+/**
+ * Creates a line path in the provided SVG element.
+ * @type {(svgElement: SVGSVGElement) => SVGElement}
+ */
+/**
+ * 
+ * @type {(svgElement: SVGSVGElement) => SVGElement}
+ */
+function createLinePath(svgElement) {
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", "5%");
+    line.setAttribute("y1", "50%");
+    line.setAttribute("x2", "95%");
+    line.setAttribute("y2", "50%");
+
+    svgElement.appendChild(line);
+
+    return line;
+}
+
+/**
+ * Setup the constants and variables which will be used
+ * to control the animation.
+ */
 
 const ROUTINES = /** @type {const} */ ([
     {
@@ -29,7 +76,11 @@ let rotationDuration = ROUTINES[0].defaultRotationDuration; // ms
 /** @type {number} */
 let distance = 0;
 
-/** @type {(routineName: typeof ROUTINES[number]["name"]) => SVGElement | undefined} */
+/** 
+ * Resets the animation and creates a new path based on the
+ * selected routine. 
+ * @type {(routineName: typeof ROUTINES[number]["name"]) => SVGElement | undefined}
+ */
 export function onRoutineChange(routineName) {
     const svgElement = document.getElementById("backdrop");
     svgElement.innerHTML = "";
@@ -45,7 +96,11 @@ export function onRoutineChange(routineName) {
     rotationDuration = routine.defaultRotationDuration;
 }
 
-/** @type {(targetPath: SVGElement | undefined) => SVGCircleElement} */
+/**
+ * Creates a target circle in the provided SVG element at the
+ * origin of the provided path.
+ * @type {(targetPath: SVGElement | undefined) => SVGCircleElement} 
+ */
 export function createTarget(targetPath = path) {
     const svgElement = document.getElementById("backdrop");
     const target = document.createElementNS("http://www.w3.org/2000/svg", "circle");
@@ -65,7 +120,11 @@ export function createTarget(targetPath = path) {
     return target;   
 }
 
-/** @type {(target: SVGCircleElement, targetPath: SVGElement | undefined, distance: number) => void} */
+/** 
+ * Moves the target circle to the provided distance along the
+ * provided path.
+ * @type {(target: SVGCircleElement, targetPath: SVGElement | undefined, distance: number) => void} 
+ */
 export function moveTarget(target, targetPath = path, distance) {
     if (!targetPath) throw new Error("No path provided");
 
@@ -76,6 +135,10 @@ export function moveTarget(target, targetPath = path, distance) {
     target.setAttribute("cy", targetPoint.y);
 }
 
+
+/**
+ * Set up the event listeners and start the animation loop.
+ */
 window.addEventListener("load", () => {
     const svgBox = document.getElementById("view-box");
     const {width, height} = svgBox.getBoundingClientRect();

@@ -7,22 +7,40 @@
 
     <div class="code-window-tiles">
         <div 
-            class="code-tile"
+            :class="{
+                'code-tile': true,
+                'code-tile--active': expanded === 'html'
+            }"
             @click.stop="setExpanded('html')"
         >
             <MarkupIcon />
         </div>
         <div 
-            class="code-tile"
+            :class="{
+                'code-tile': true,
+                'code-tile--active': expanded === 'script'
+            }"
             @click.stop="setExpanded('script')"
         >
             <ScriptIcon />
         </div>
         <div 
-            class="code-tile"
+            :class="{
+                'code-tile': true,
+                'code-tile--active': expanded === 'styles'
+            }"
             @click.stop="setExpanded('styles')"
         >
             <StylesIcon />
+        </div>
+        <div 
+            :class="{
+                'code-tile': true,
+                'code-tile--active': expanded === 'markdown'
+            }"
+            @click.stop="setExpanded('markdown')"
+        >
+            <MarkdownIcon />
         </div>
     </div>
 
@@ -40,14 +58,35 @@
         <pre v-if="!stylesContents">Loading...</pre>
         <pre v-highlightjs v-else><code class="css">{{ stylesContents }}</code></pre>
     </div>
+
+    <div class="code-window markdown" v-if="expanded === 'markdown'">
+        <VueMarkdown :source="markdownContents"
+        />
+    </div>
 </template>
 
 <script lang="ts" setup>
 import {ref, onMounted, computed} from 'vue';
 import { useRoute } from 'vue-router';
-import { MarkupIcon, StylesIcon, ScriptIcon } from '../icons';
-const expanded = ref<'html' | 'script' | 'styles' | null>(null);
-function setExpanded(value: 'html' | 'script' | 'styles' | null) {
+import {
+    MarkdownIcon,
+    MarkupIcon,
+    StylesIcon,
+    ScriptIcon
+} from '../icons';
+
+import VueMarkdown from 'vue-markdown-render';
+
+const CODE_TABS = ['html', 'script', 'styles', 'markdown'] as const;
+type CodeTab = typeof CODE_TABS[number];
+
+const expanded = ref<CodeTab | null>(null);
+function setExpanded(value: CodeTab | null) {
+    if (value === expanded.value) {
+        expanded.value = null;
+        return;
+    }
+
     expanded.value = value;
 }
 
@@ -56,10 +95,12 @@ const route = useRoute();
 const scriptContents = ref('');
 const stylesContents = ref('');
 const htmlContents = ref('');
+const markdownContents = ref('');
 
 const islandLink = computed(() => `/static-islands/${route.name?.toString()}/index.html`);
 const scriptLink = computed(() => `/static-islands/${route.name?.toString()}/script.js`);
 const styleLink = computed(() => `/static-islands/${route.name?.toString()}/styles.css`);
+const markdownLink = computed(() => `/static-islands/${route.name?.toString()}/README.md`);
 
 onMounted(() => {
     fetch(islandLink.value)
@@ -73,6 +114,10 @@ onMounted(() => {
     fetch(styleLink.value)
         .then(res => res.text())
         .then(text => stylesContents.value = text);
+
+    fetch(markdownLink.value)
+        .then(res => res.text())
+        .then(text => markdownContents.value = text);
 });
 </script>
 
@@ -100,6 +145,10 @@ onMounted(() => {
     border-radius: 0px 10px 10px 0px;
 
     cursor: pointer;
+
+    &--active {
+        filter: brightness(.5);
+    }
 }
 
 .code-window {
@@ -123,6 +172,11 @@ onMounted(() => {
 
     & > pre {
         margin: 0px;
+    }
+
+    &.markdown {
+        padding: 15px;
+        font-family: 'Poppins', sans-serif;
     }
 }
 
