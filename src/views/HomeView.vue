@@ -15,6 +15,8 @@ import { publicIslands } from '@/publicIslands';
 </script>
 
 <style lang="scss" scoped>
+@import '@/global.scss';
+
 .islands {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -22,5 +24,10 @@ import { publicIslands } from '@/publicIslands';
 
     margin-top: 15px;
     gap: 15px;
+
+    @media (max-width: $desktop-breakpoint) {
+        display: flex;
+        flex-direction: column;
+    }
 }
 </style>

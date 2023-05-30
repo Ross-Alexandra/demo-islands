@@ -76,6 +76,8 @@ nav {
 
 .app-body {
     padding: 15px;
+
+    position: relative;
 }
 
 footer {

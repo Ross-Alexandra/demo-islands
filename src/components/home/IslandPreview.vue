@@ -27,12 +27,16 @@ const islandLink = computed(() => `/static-islands/${props.name}/index.html`);
 </script>
 
 <style lang="scss" scoped>
+@import '@/global.scss';
+
 .island-preview {
     display: flex;
     flex-direction: column;
     gap: 10px;
 
+    height: 100%;
     width: min-content;
+    max-width: 100%;
 
     padding: 15px;
     background-color: var(--layer-color);
@@ -40,6 +44,10 @@ const islandLink = computed(() => `/static-islands/${props.name}/index.html`);
     border-radius: 10px;
 
     text-decoration: none;
+
+    @media (max-width: $tablet-breakpoint) {
+        width: 100%;
+    }
 
     position: relative;
     &::after {
@@ -73,6 +81,11 @@ const islandLink = computed(() => `/static-islands/${props.name}/index.html`);
         height: 250px;
 
         border-radius: 5px;
+
+        @media (max-width: $tablet-breakpoint) {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+        }
     }
 
     h3 {

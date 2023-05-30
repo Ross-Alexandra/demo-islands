@@ -122,6 +122,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/global.scss';
+
 .code-window-tiles {
     position: absolute;
     left: 0px;
@@ -131,6 +133,14 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    @media (max-width: $tablet-breakpoint) {
+        top: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        flex-direction: row;
+    }
 }
 
 .code-tile {
@@ -148,6 +158,10 @@ onMounted(() => {
 
     &--active {
         filter: brightness(.5);
+    }
+
+    @media (max-width: $tablet-breakpoint) {
+        border-radius: 0px 0px 10px 10px;
     }
 }
 
@@ -177,6 +191,10 @@ onMounted(() => {
     &.markdown {
         padding: 15px;
         font-family: 'Poppins', sans-serif;
+    }
+
+    @media (max-width: $tablet-breakpoint) {
+        max-width: 95vw;
     }
 }
 
