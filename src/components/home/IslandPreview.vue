@@ -1,9 +1,7 @@
 <template>
-    <a 
+    <router-link 
         class="island-preview"
-        :href="islandLink"
-        target="_blank"
-        rel="noopener noreferrer"
+        :to="`/${props.name}`"
     >
         <iframe
             :src="islandLink"
@@ -14,7 +12,7 @@
             <h3>{{ props.name }}</h3>
             <p>{{ props.description }}</p>
         </div>
-    </a>
+    </router-link>
 </template>
 
 <script lang="ts" setup>
@@ -46,13 +44,30 @@ const islandLink = computed(() => `/static-islands/${props.name}/index.html`);
     position: relative;
     &::after {
         position: absolute;
-        inset: 0px;
+        z-index: 1;
+        inset: -1px; // cover the border on hover
+        border-radius: 10px;
         content: '';
+
+        transition: background-color 250ms;
+        background-color: rgba(0, 0, 0, 0);
     }
+
+    &:hover::after {
+            display: grid;
+            place-items: center;
+            content: 'Demo Only, Click to View';
+
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
     iframe {
         outline: none;
-        border: 1px solid var(--border-color);
+        border: none;
 
         width: 500px;
         height: 250px;

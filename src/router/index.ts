@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { publicIslands } from '@/publicIslands';
 import HomeView from '@/views/HomeView.vue';
 
 const router = createRouter({
@@ -9,6 +10,11 @@ const router = createRouter({
             name: 'home',
             component: HomeView
         },
+        ...Object.values(publicIslands).map(island => ({
+            path: `/${island.name}`,
+            name: island.name,
+            component: () => import(`../views/IslandView.vue`)
+        } as RouteRecordRaw)),
         {
             path: '/:pathMatch(.*)*',
             redirect: '/',

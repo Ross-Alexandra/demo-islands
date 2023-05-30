@@ -18,17 +18,21 @@ body {
     padding: 15px;
 }
 
-#backdrop {
+#view-box {
     width: 100%;
     height: 100%;
 
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
 
+    overflow: hidden;
+}
+
+#backdrop {
     padding: 20px 5%;
 }
 
-.controls {
+#controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,6 +40,10 @@ body {
     padding: 0 1rem;
 
     margin-top: auto;
+}
+
+#controls select {
+    text-transform: capitalize;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -56,7 +64,7 @@ h1, h2, h3, h4, h5, h6, p {
         display: none;
     }
 
-    .controls {
+    #controls {
         display: none;
     }
 }

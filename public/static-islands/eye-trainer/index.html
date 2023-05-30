@@ -26,13 +26,17 @@
             <p>To change how this works, use the controls below</p>
         </div>
 
-        <svg id="backdrop" viewBox="0 0 1000 1000"></svg>
+        <div id="view-box">
+            <svg id="backdrop" width="0" height="0" viewBox="0 0 1000 1000"></svg>
+        </div>
 
-        <div class="controls">
+        <div id="controls">
             <label>
                 Routine
-                <select>
-                    <option>Circle</option>
+                <select 
+                    id="routine-select"
+                    onchange="onRoutineChange(this.value)"
+                >
                 </select>
             </label>
         </div>

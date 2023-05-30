@@ -1,8 +1,7 @@
 <template>
-    <div class="content" data-theme="dark">
+    <div class="content">
         <nav>
-            <h1>Demo Islands</h1>
-            <p>A collection of my frontend snippets and tiny projects</p>
+            <router-link to="/">Demo Islands</router-link>
         </nav>
         <div class="app-body">
             <router-view />
@@ -26,29 +25,27 @@ body {
 
 h1, h2, h3, h4, h5, h6, p {
     margin: unset;
-    font-family: 'Poppins', sans-serif;
     color: var(--text-color);
 }
 
+a {
+    font-family: 'Poppins', sans-serif;
+}
+
 .content {
-    &[data-theme="dark"] {
-        --app-background-color: #202120;
-        --text-color: #fff;
-        --layer-color: rgba(255, 255, 255, 0.1);
-        --border-color: rgba(255, 255, 255, 0.2);
-    }
+    --app-background-color: rgb(47, 47, 47);
+    --text-color: #fff;
+    --layer-color: rgba(255, 255, 255, 0.2);
+    --border-color: rgba(255, 255, 255, 0.3);
 
-    &[data-theme="light"] {
-        --app-background-color: #dce9dc;
-        --text-color: #000;
-        --layer-color: rgba(0, 0, 0, 0.1);
-        --border-color: rgba(0, 0, 0, 0.2);
-    }
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
 
-    display: flex;
-    flex-direction: column;
-    
-    background-color: var(--app-background-color);
+    background-image:
+        linear-gradient(rgba(0, 0, 0, .85), rgba(0, 0, 0, .85)),
+        url('https://source.unsplash.com/PRJWxwDmtsE');
+    background-size: cover;
+    background-position: center;
     color: var(--text-color);
 
     overflow-x: hidden;
@@ -68,6 +65,13 @@ nav {
 
     background-color: var(--layer-color);
     border-bottom: 1px solid var(--border-color);
+
+    a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 2rem;
+        font-weight: 700;
+    }
 }
 
 .app-body {
