@@ -89,5 +89,7 @@ footer {
     border-top: 1px solid var(--border-color);
 
     margin-top: auto;
+
+    font-family: 'Poppins', sans-serif;
 }
 </style>
